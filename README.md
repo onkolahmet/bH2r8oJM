@@ -172,6 +172,15 @@ python main.py --model_id "Qwen/Qwen2-0.5B-Instruct" --dataset_id "gretelai/synt
 
 ## Usage
 
+## Hugging Face Model and Web Demo
+
+You can explore the fine-tuned model and try out the live demo on Hugging Face:
+
+- 🔗 [Model on Hugging Face Hub](https://huggingface.co/onkolahmet/Qwen2-0.5B-Instruct-SQL-generator)
+- 🌐 [Live Demo on Hugging Face Spaces](https://huggingface.co/spaces/onkolahmet/text-to-sql-converter)
+
+> ⚠️ **Note:** The Hugging Face Spaces demo runs on a **free-tier 16 GB CPU environment**, which have limitations in responsiveness and output size. For more robust performance, I would recommended to run the model locally or on a more powerful backend.
+
 ### Running the Web Interface
 
 Start the Gradio web interface:
@@ -179,7 +188,7 @@ Start the Gradio web interface:
 ```bash
 gradio app.py
 ```
-Then open your browser and navigate to [http://localhost:7860](http://localhost:7860) to use the application.
+Then open your browser and navigate to [http://127.0.0.1:7860](http://127.0.0.1:7860) to use the application.
 
 ### Using the Interface
 
