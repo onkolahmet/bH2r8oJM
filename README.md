@@ -146,3 +146,72 @@ The model was evaluated using standard text generation metrics and SQL-specific 
 ```bash
 git clone https://github.com/your-username/text-to-sql-generator.git
 cd text-to-sql-generator
+```
+2. Run the setup script to install dependencies:
+```bash
+python setup.py
+```
+This script will:
+
+- Check for GPU availability
+- Install pip if not available
+- Install required packages from requirements.txt
+
+## Model Training (Optional)
+If you want to train the model yourself:
+```bash
+python main.py --model_id "Qwen/Qwen2-0.5B-Instruct" --dataset_id "gretelai/synthetic_text_to_sql" --epochs 5 --batch_size 8 --user_name "your_username"
+```
+## Parameters
+
+- `--model_id`: Hugging Face model to use as base  
+- `--dataset_id`: Dataset to use for fine-tuning  
+- `--epochs`: Number of training epochs  
+- `--batch_size`: Batch size for training  
+- `--hf_login`: Whether to login to Hugging Face (set to False if not pushing to Hub)  
+
+## Usage
+
+### Running the Web Interface
+
+Start the Gradio web interface:
+
+```bash
+gradio app.py
+```
+Then open your browser and navigate to [http://localhost:7860](http://localhost:7860) to use the application.
+
+### Using the Interface
+
+1. Enter your question in natural language  
+   _(e.g., "Find all products in the Electronics category with a price less than $500")_
+2. Optionally provide table context/schema information  
+3. Click **"Generate SQL Query"** or press Enter  
+4. View and copy the generated SQL query  
+
+---
+
+## Project Architecture
+
+The project consists of several key files:
+
+- `setup.py`: Handles environment setup and dependency installation  
+- `get_model.py`: Loads pre-trained model and tokenizer  
+- `data.py`: Handles dataset loading and formatting for training  
+- `main.py`: Contains training logic and Hugging Face Hub integration  
+- `evaluation.py`: Implements comprehensive model evaluation metrics  
+- `app.py`: Deploys the model with a Gradio web interface  
+
+---
+
+## Future Work
+
+Based on the evaluation results, several areas could be improved:
+
+- **Enhanced training data**: Incorporating more complex SQL queries and diverse table schemas  
+- **Iterative prompting**: Implementing a two-step process that first identifies tables and then constructs queries  
+- **SQL validation**: Adding a validation step to ensure generated SQL is syntactically correct  
+- **User feedback loop**: Implementing a feedback mechanism to collect corrections that could be used for further fine-tuning  
+- **Optimization for specific database dialects**: Tailoring the model for MySQL, PostgreSQL, or SQLite specific syntax  
+
+---
