@@ -188,6 +188,15 @@ git clone https://github.com/your-username/text-to-sql-generator.git
 cd text-to-sql-generator
 ```
 2. Run the setup script to install dependencies:
+
+Before evaluating, **make sure to create a virtual environment** and activate it. This ensures dependencies are isolated and managed properly.
+
+```bash
+# Create and activate virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows use: venv\Scripts\activate
+```
+Then install the packages with:
 ```bash
 python setup.py
 ```
@@ -208,7 +217,7 @@ python main.py --model_id "Qwen/Qwen2-0.5B-Instruct" --dataset_id "gretelai/synt
 - `--dataset_id`: Dataset to use for fine-tuning  
 - `--epochs`: Number of training epochs  
 - `--batch_size`: Batch size for training  
-- `--hf_login`: Whether to login to Hugging Face (set to False if not pushing to Hub)  
+- `--user_name`: Hugging Face user name for pushing the model 
 
 ## Usage
 
