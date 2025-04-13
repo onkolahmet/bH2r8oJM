@@ -38,7 +38,6 @@ def create_requirements_file():
         "transformers>=4.37.0",
         "datasets>=2.14.0",
         "trl>=0.7.4",
-        "unsloth>=0.3.0",
         "gradio>=3.50.0",
         "torch>=2.1.0",
         "evaluate>=0.4.0",
@@ -53,13 +52,11 @@ def create_requirements_file():
         "scipy",
         "scikit-learn",
         "tensorboard",
-        "streamlit>=1.27.0",
         "tqdm>=4.66.0",
         "nltk>=3.8.1",
-        "gradio>=3.50.0",
-        "python-dotenv>=1.0.0",
-        "unbabel-comet"
+        "gradio>=3.50.0"
         ]
+        
 
     with open("requirements.txt", "w") as f:
         f.write("\n".join(requirements))
