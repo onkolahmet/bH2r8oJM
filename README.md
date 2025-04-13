@@ -8,6 +8,7 @@ This project develops and deploys a fine-tuned language model for converting nat
 - [Dataset](#dataset)
 - [Implementation Details](#implementation-details)
 - [Evaluation Results](#evaluation-results)
+- [Evaluation Framework](#evaluation-framework)
 - [Setup Instructions](#setup-instructions)
 - [Usage](#usage)
 - [Project Architecture](#project-architecture)
@@ -75,6 +76,57 @@ The model is deployed using **Gradio**, which provides:
 3. Schema input capabilities to better contextualize questions
 4. Syntax highlighting for the generated SQL
 5. No-code deployment that runs on standard hardware
+
+## Evaluation Framework
+
+I developed a comprehensive evaluation framework in `evaluation.py` to assess model performance using both standard text generation metrics and SQL-specific metrics.
+
+### Running the Evaluation
+
+Evaluating the model is straightforward. After setting up the environment and having the trained model ready, simply run:
+
+```bash
+python evaluation.py
+```
+
+This script will:
+
+1. Load the fine-tuned model from Hugging Face Hub
+2. Sample test examples from the gretelai/synthetic_text_to_sql test split
+3. Generate SQL queries using both zero-shot and few-shot approaches
+4. Apply SQL post-processing to the generated queries
+5. Calculate all metrics and output a comprehensive evaluation report
+6. Save detailed results to CSV files for further analysis
+
+The evaluation results are also saved as model card metrics in markdown format.
+
+
+### Standard Text Generation Metrics
+
+- **BLEU Score**: Measures the precision of n-grams in the generated SQL compared to the reference SQL  
+- **ROUGE-L F1**: Evaluates the longest common subsequence between generated and reference SQL  
+- **CHRF Score**: Character n-gram F-score that captures character-level similarities  
+
+### SQL-Specific Custom Metrics
+
+- **Exact Match (case insensitive)**: Percentage of queries that exactly match the reference after case normalization  
+- **Normalized Exact Match**: Percentage of queries that match the reference after normalization (case, whitespace, keyword formatting)  
+- **Component Match**: Analyzes structural components of SQL (SELECT, FROM, WHERE clauses) and calculates the percentage match  
+- **Entity Match**: Measures how well the model identifies correct tables and columns from the database schema  
+
+### Post-processing Evaluation
+
+The evaluation script also compares metrics before and after SQL post-processing to quantify the improvement from cleaning operations.
+
+### Quality Classification
+
+I implemented a quality classification system based on component matching:
+
+- **High Quality (≥80% component match)**: Queries that are almost structurally perfect  
+- **Medium Quality (50–79% component match)**: Queries that have the right entities but need minor corrections  
+- **Low Quality (<50% component match)**: Queries that need significant corrections  
+
+The evaluation is performed on the test split of the same dataset used for training (`gretelai/synthetic_text_to_sql`), providing a fair assessment of the model's ability to generalize to unseen examples within the same distribution.
 
 ## Evaluation Results
 
