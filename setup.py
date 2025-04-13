@@ -31,22 +31,6 @@ def ensure_pip_installed():
             print("Please install pip manually and try again.")
             return False
 
-# Check GPU availability
-def check_gpu_availability():
-    try:
-        import torch
-        gpu_available = torch.cuda.is_available()
-        if gpu_available:
-            device_count = torch.cuda.device_count()
-            device_name = torch.cuda.get_device_name(0) if device_count > 0 else "Unknown"
-            print(f"GPU is available: {device_count} device(s) detected")
-            print(f"Using device: {device_name}")
-        else:
-            print("No GPU detected, running with CPU only")
-        return gpu_available
-    except ImportError:
-        print("PyTorch not installed, cannot check GPU availability")
-        return False
 
 # Create requirements.txt file
 def create_requirements_file():
@@ -96,4 +80,3 @@ if __name__ == "__main__":
     if ensure_pip_installed():
         create_requirements_file()
         install_requirements()
-        check_gpu_availability()
