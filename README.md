@@ -281,5 +281,6 @@ Based on the evaluation results, several areas could be improved:
 - **SQL validation**: Adding a validation step to ensure generated SQL is syntactically correct  
 - **User feedback loop**: Implementing a feedback mechanism to collect corrections that could be used for further fine-tuning  
 - **Optimization for specific database dialects**: Tailoring the model for MySQL, PostgreSQL, or SQLite specific syntax  
+- **Bash Scripts**: Setups can be done by using bash scripts. 
 
 ---
