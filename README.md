@@ -12,6 +12,7 @@ This project develops and deploys a fine-tuned language model for converting nat
 - [Setup Instructions](#setup-instructions)
 - [Usage](#usage)
 - [Project Architecture](#project-architecture)
+- [UI Images](#ui-images)
 - [Future Work](#future-work)
 
 ## Project Overview
@@ -261,6 +262,16 @@ The project consists of several key files:
 - `app.py`: Deploys the model with a Gradio web interface  
 
 ---
+## UI Images
+![UI Screenshot 1](./images/ui-scr-1.png)
+
+![UI Screenshot 2](./images/ui-scr-2.png)
+
+![UI Screenshot 3](./images/ui-scr-3.png)
+
+![UI Screenshot 4](./images/ui-scr-4.png)
+
+![UI Screenshot 5](./images/ui-scr-5.png)
 
 ## Future Work
 
