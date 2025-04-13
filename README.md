@@ -17,7 +17,7 @@ This project develops and deploys a fine-tuned language model for converting nat
 ## Project Overview
 
 In this project, I've developed a system that:
-1. Fine-tunes a lightweight but powerful language model (Qwen2-0.5B-Instruct) on text-to-SQL tasks
+1. Fine-tunes a lightweight but powerful language model [Qwen2-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2-0.5B-Instruct) on text-to-SQL tasks
 2. Implements SQL post-processing to improve the quality of generated queries
 3. Deploys the model with a user-friendly Gradio web interface
 
@@ -25,7 +25,7 @@ The system enables users to input natural language questions along with optional
 
 ## Model Selection
 
-I selected **Qwen/Qwen2-0.5B-Instruct** for this project for several key reasons:
+I selected **[Qwen/Qwen2-0.5B-Instruct](https://huggingface.co/Qwen/Qwen2-0.5B-Instruct)** for this project for several key reasons:
 
 1. **Balance of size and performance**: At 0.5B parameters, the model is small enough to be deployed easily but still has strong reasoning capabilities when fine-tuned.
 2. **Instruction-tuned foundation**: The base model already understands how to follow instructions, making it well-suited for the fine-tuning approach.
@@ -36,7 +36,7 @@ The decision focused on finding a balance between model capabilities and practic
 
 ## Dataset
 
-For training, I used the **gretelai/synthetic_text_to_sql** dataset from Hugging Face, which contains:
+For training, I used the **[gretelai/synthetic_text_to_sql](https://huggingface.co/datasets/gretelai/synthetic_text_to_sql)** dataset from Hugging Face, which contains:
 - Natural language questions
 - Corresponding SQL queries
 - Table context/schema information
@@ -51,7 +51,7 @@ This dataset is particularly valuable because:
 
 ### Fine-tuning Approach
 
-I used the Hugging Face **TRL (Transformer Reinforcement Learning)** library with **SFTTrainer** for supervised fine-tuning. Key implementation decisions include:
+I used the Hugging Face **[TRL (Transformer Reinforcement Learning)](https://huggingface.co/docs/trl/en/index)** library with **[SFTTrainer](https://huggingface.co/docs/trl/en/sft_trainer)** for supervised fine-tuning. Key implementation decisions include:
 
 1. **Response template masking**: Used a "### The response query is:" template with DataCollatorForCompletionOnlyLM to focus training on generation rather than understanding.
 2. **Structured prompt format**: Implemented a consistent prompt structure including table context and questions.
@@ -98,7 +98,7 @@ This script will:
 5. Calculate all metrics and output a comprehensive evaluation report
 6. Save detailed results to CSV files for further analysis
 
-The evaluation results are also saved as model card metrics in markdown format.
+The evaluation results are also saved as [model card metrics](https://huggingface.co/onkolahmet/Qwen2-0.5B-Instruct-SQL-generator) in markdown format.
 
 
 ### Standard Text Generation Metrics
@@ -114,25 +114,13 @@ The evaluation results are also saved as model card metrics in markdown format.
 - **Component Match**: Analyzes structural components of SQL (SELECT, FROM, WHERE clauses) and calculates the percentage match  
 - **Entity Match**: Measures how well the model identifies correct tables and columns from the database schema  
 
-### Post-processing Evaluation
-
-The evaluation script also compares metrics before and after SQL post-processing to quantify the improvement from cleaning operations.
-
-### Quality Classification
-
-I implemented a quality classification system based on component matching:
-
-- **High Quality (≥80% component match)**: Queries that are almost structurally perfect  
-- **Medium Quality (50–79% component match)**: Queries that have the right entities but need minor corrections  
-- **Low Quality (<50% component match)**: Queries that need significant corrections  
-
 The evaluation is performed on the test split of the same dataset used for training (`gretelai/synthetic_text_to_sql`), providing a fair assessment of the model's ability to generalize to unseen examples within the same distribution.
 
 ## Evaluation Results
 
-The model was evaluated using standard text generation metrics and SQL-specific metrics:
+The model was evaluated using standard text generation metrics and SQL-specific metrics on 'gretelai/synthetic_text_to_sql/test':
 
-### Zero-shot Prompting (on `gretelai/synthetic_text_to_sql/test`)
+### Zero-shot Prompting
 
 **After Post-processing:**
 * **BLEU Score:** 0.5195
@@ -155,7 +143,7 @@ The model was evaluated using standard text generation metrics and SQL-specific 
 * **Medium Quality (50-79% component match):** 28 (28.0%)
 * **Low Quality (<50% component match):** 54 (54.0%)
 
-### Few-shot Prompting (on `gretelai/synthetic_text_to_sql/test`)
+### Few-shot Prompting
 
 **After Post-processing:**
 * **BLEU Score:** 0.2680
@@ -231,7 +219,7 @@ You can explore the fine-tuned model and try out the live demo on Hugging Face:
 - 🔗 [Model on Hugging Face Hub](https://huggingface.co/onkolahmet/Qwen2-0.5B-Instruct-SQL-generator)
 - 🌐 [Live Demo on Hugging Face Spaces](https://huggingface.co/spaces/onkolahmet/text-to-sql-converter)
 
-> ⚠️ **Note:** The Hugging Face Spaces demo runs on a **free-tier 16 GB CPU environment**, which have limitations in responsiveness and output size. For more robust performance, I would recommended to run the model locally or on a more powerful backend.
+> ⚠️ **Note:** The Hugging Face Spaces demo runs on a **free-tier 16 GB CPU environment**, which have limitations in responsiveness and output size. For more robust performance, I would recommend to run the model locally or on a more powerful backend.
 
 ### Running the Web Interface
 
