@@ -185,8 +185,8 @@ The model was evaluated using standard text generation metrics and SQL-specific 
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/text-to-sql-generator.git
-cd text-to-sql-generator
+git clone https://github.com/onkolahmet/bH2r8oJM.git
+cd bH2r8oJM
 ```
 2. Run the setup script to install dependencies:
 
