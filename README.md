@@ -203,7 +203,6 @@ python setup.py
 ```
 This script will:
 
-- Check for GPU availability
 - Install pip if not available
 - Install required packages from requirements.txt
 
